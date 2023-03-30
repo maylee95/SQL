@@ -1,0 +1,32 @@
+--Create a clothing store database
+
+CREATE TABLE clothing_store (id INTEGER PRIMARY KEY, item TEXT, price INTEGER, quantity INTEGER, aisle INTEGER);
+
+INSERT INTO clothing_store VALUES (1, "long sleeve shirts", 20, 30, 4);
+INSERT INTO clothing_store VALUES (2, "short sleeve shirts", 15, 50, 4);
+INSERT INTO clothing_store VALUES (3, "tank tops", 13, 30, 3);
+INSERT INTO clothing_store VALUES (4, "pants", 35, 20, 5);
+INSERT INTO clothing_store VALUES (5, "shorts", 30, 30, 5);
+INSERT INTO clothing_store VALUES (6, "skirts", 20, 10, 6);
+INSERT INTO clothing_store VALUES (7, "dresses", 30, 10, 6);
+INSERT INTO clothing_store VALUES (8, "socks", 10, 30, 7);
+INSERT INTO clothing_store VALUES (9, "rompers", 30, 12, 6);
+INSERT INTO clothing_store VALUES (10, "vests", 12, 15, 3);
+INSERT INTO clothing_store VALUES (11, "sweaters", 30, 22, 2);
+INSERT INTO clothing_store VALUES (12, "jackets", 30, 12, 2);
+INSERT INTO clothing_store VALUES (13, "underwear", 10, 30, 7);
+INSERT INTO clothing_store VALUES (14, "cardigans", 20, 15, 2);
+INSERT INTO clothing_store VALUES (15, "hoodies", 30, 65, 2);
+
+--display the database ordered by price.
+SELECT * FROM clothing_store 
+ORDER BY price;
+
+--what items can be found in aisle 2?
+SELECT item FROM clothing_store 
+WHERE aisle = 2;
+
+--display the stock available for each item, from most to least.
+SELECT item, quantity 
+FROM clothing_store 
+ORDER BY quantity DESC;
