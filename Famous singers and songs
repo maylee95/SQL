@@ -1,0 +1,45 @@
+CREATE TABLE singers (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, genre TEXT);
+
+INSERT INTO singers (name, age, genre) VALUES ('Carrie Underwood', 40, 'country');
+INSERT INTO singers (name, age, genre) VALUES ('Bruno Mars', 37, 'pop');
+INSERT INTO singers (name, age, genre) VALUES ('Stevie Wonder', 72, 'soul');
+INSERT INTO singers (name, age, genre) VALUES ('Kelly Clarkson', 40, 'pop');
+INSERT INTO singers (name, age, genre) VALUES ('Yebba', 28, 'R&B');
+
+CREATE TABLE songs (id INTEGER PRIMARY KEY AUTOINCREMENT, singer_id INTEGER, name TEXT);
+
+INSERT INTO songs (singer_id, name) VALUES (1, 'Before He Cheats');
+INSERT INTO songs (singer_id, name) VALUES (2, 'Versace on the Floor');
+INSERT INTO songs (singer_id, name) VALUES (2, 'When I Was Your Man');
+INSERT INTO songs (singer_id, name) VALUES (2, 'Just The Way You Are');
+INSERT INTO songs (singer_id, name) VALUES (3, 'Signed, Sealed, Delivered');
+INSERT INTO songs (singer_id, name) VALUES (3, 'Superstition');
+INSERT INTO songs (singer_id, name) VALUES (4, 'Breakaway');
+INSERT INTO songs (singer_id, name) VALUES (4, 'Since U Been Gone');
+INSERT INTO songs (singer_id, name) VALUES (4, 'Because of You');
+INSERT INTO songs (singer_id, name) VALUES (5, 'My Mind');
+INSERT INTO songs (singer_id, name) VALUES (5, 'October Sky');
+INSERT INTO songs (singer_id, name) VALUES (5, 'Evergreen');
+
+CREATE TABLE birthplace (id INTEGER PRIMARY KEY AUTOINCREMENT, singer_id INTEGER, city TEXT);
+
+INSERT INTO birthplace (singer_id, city) VALUES (1, 'Muskogee, OK');
+INSERT INTO birthplace (singer_id, city) VALUES (2, 'Honolulu, HI');
+INSERT INTO birthplace (singer_id, city) VALUES (3, 'Saginaw, MI');
+INSERT INTO birthplace (singer_id, city) VALUES (4, 'Fort Worth, TX');
+INSERT INTO birthplace (singer_id, city) VALUES (5, 'West Memphis, AR');
+
+/*what are the names of the songs for each singer?*/
+SELECT s.name, songs.name
+FROM singers s 
+JOIN songs 
+ON s.id = songs.singer_id;
+
+/*how many songs does each singer have?*/
+SELECT s.name, COUNT(songs.name)
+FROM singers s 
+JOIN songs 
+ON s.id = songs.singer_id
+GROUP BY s.name;
+
+/*show the birthplace of each singer that has more than 2 songs*/
