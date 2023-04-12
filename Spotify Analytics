@@ -34,13 +34,29 @@ FROM BIT_DB.spotifydata
 ORDER BY popularity desc
 LIMIT 10;
 
-#2. What artist released the longest song?
-SELECT artist_name, track_name, duration_ms
-FROM BIT_DB.Spotifydata
-ORDER BY duration_ms DESC
-LIMIT 1;
-
-#3. How many songs were in a major key?
+#2. How many songs were in a major key?
 SELECT COUNT(song_mode)
 FROM BIT_DB.Spotifydata
 WHERE song_mode = 1;
+
+#3. What's the average danceability for the 10 most popular songs?
+WITH top_popular AS
+(SELECT danceability, popularity
+FROM Spotifydata
+ORDER BY popularity DESC
+LIMIT 10)
+
+SELECT AVG(danceability) AS avg_danceability
+FROM top_popular;
+
+#4. Calculate the average popularity for the artists in the Spotify data table. 
+Then, for every artist with an average popularity of 90 or above, 
+show their name, their average popularity, and label them as a “Top Star”.
+WITH avg_popularity_CTE AS 
+(SELECT artist_name, AVG(popularity) AS avg_popularity
+FROM Spotifydata
+GROUP BY artist_name)
+
+SELECT artist_name, avg_popularity, 'Top Star' AS tag
+FROM avg_popularity_CTE
+WHERE avg_popularity >= 90;
